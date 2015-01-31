@@ -1,8 +1,3 @@
-
-
-
-
-
 /************************************************************************************
 
 Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
@@ -97,7 +92,6 @@ public class OVRPlayerController : MonoBehaviour
 	private bool  HaltUpdateMovement = false;
 	private bool prevHatLeft = false;
 	private bool prevHatRight = false;
-	private bool prevJump = false;
 	private float SimulationRate = 60f;
 
 	void Awake()
@@ -160,19 +154,6 @@ public class OVRPlayerController : MonoBehaviour
 		MoveThrottle.y = (MoveThrottle.y > 0.0f) ? (MoveThrottle.y / motorDamp) : MoveThrottle.y;
 		MoveThrottle.z /= motorDamp;
 
-
-		// Check if the jump button is pressed on the controller and perform a jump
-		bool shouldJump = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.A);
-		
-		if (shouldJump && !prevJump) 
-		{
-//			print ("Just pressed the button");
-//			Jump ();
-		}
-		
-		prevJump = shouldJump;
-		// End jump code
-
 		moveDirection += MoveThrottle * SimulationRate * Time.deltaTime;
 
 		// Gravity
@@ -181,9 +162,7 @@ public class OVRPlayerController : MonoBehaviour
 		else
 			FallSpeed += ((Physics.gravity.y * (GravityModifier * 0.002f)) * SimulationRate * Time.deltaTime);
 
-//		print ("Move before: " + moveDirection.y);
 		moveDirection.y += FallSpeed * SimulationRate * Time.deltaTime;
-//		print ("Move after: " + moveDirection.y);
 
 		// Offset correction for uneven ground
 		float bumpUpOffset = 0.0f;
@@ -217,17 +196,17 @@ public class OVRPlayerController : MonoBehaviour
 
 		bool dpad_move = false;
 
-//		if (OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.Up))
-//		{
-//			moveForward = true;
-//			dpad_move   = true;
-//
-//		}
-//		if (OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.Down))
-//		{
-//			moveBack  = true;
-//			dpad_move = true;
-//		}
+		if (OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.Up))
+		{
+			moveForward = true;
+			dpad_move   = true;
+
+		}
+		if (OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.Down))
+		{
+			moveBack  = true;
+			dpad_move = true;
+		}
 
 		MoveScale = 1.0f;
 
@@ -262,8 +241,7 @@ public class OVRPlayerController : MonoBehaviour
 		if (moveRight)
 			MoveThrottle += ort * (transform.lossyScale.x * moveInfluence * BackAndSideDampen * Vector3.right);
 
-//		bool curHatLeft = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.LeftShoulder);
-		bool curHatLeft = false;
+		bool curHatLeft = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.LeftShoulder);
 
 		Vector3 euler = transform.rotation.eulerAngles;
 
@@ -272,8 +250,7 @@ public class OVRPlayerController : MonoBehaviour
 
 		prevHatLeft = curHatLeft;
 
-//		bool curHatRight = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.RightShoulder);
-		bool curHatRight = false;
+		bool curHatRight = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.RightShoulder);
 
 		if(curHatRight && !prevHatRight)
 			euler.y += RotationRatchet;
@@ -318,9 +295,6 @@ public class OVRPlayerController : MonoBehaviour
 		euler.y += rightAxisX * rotateInfluence;
 
 		transform.rotation = Quaternion.Euler(euler);
-
-
-
 	}
 
 	/// <summary>
