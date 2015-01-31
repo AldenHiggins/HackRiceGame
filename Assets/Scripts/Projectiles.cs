@@ -49,6 +49,7 @@ public class Projectiles : MonoBehaviour {
 		if (xPressed && !previousXDown)
 		{
 			//cubeProjectileObject = (GameObject) Instantiate (cubeBomb);
+
 		}
 		// Animate projectile in front of player
 		else if (xPressed)
