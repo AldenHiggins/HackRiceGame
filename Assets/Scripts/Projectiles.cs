@@ -13,6 +13,7 @@ public class Projectiles : MonoBehaviour {
 
 	private GameObject cubeProjectileObject;
 	private bool previousBDown = false;
+	private bool previousYDown = false;
 
 	// Update is called once per frame
 	void Update () {
@@ -62,6 +63,11 @@ public class Projectiles : MonoBehaviour {
 		}
 		
 		previousXDown = xPressed;
+
+
+		// Attaching the Y button to Magnetic Cube
+		bool yPressed = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.Y);
+
 
 	}
 
