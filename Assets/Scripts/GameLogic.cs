@@ -18,6 +18,8 @@ public class GameLogic : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		Application.LoadLevel ("SeansRoom");
+
 		pullBlocksLeft = startingPull;
 		pushBlocksLeft = startingPush;
 
