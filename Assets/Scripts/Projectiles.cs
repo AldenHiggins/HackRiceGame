@@ -12,7 +12,7 @@ public class Projectiles : MonoBehaviour {
 	public GameObject cubeProjectile;
 	public GameObject player;
 	public GameObject cubeMagnet;
-	public GameObject cubeBomb;
+	public GameObject cubePush;
 
 	private GameObject cubeProjectileObject;
 	private bool previousBDown = false;
@@ -50,7 +50,7 @@ public class Projectiles : MonoBehaviour {
 		// Create projectile
 		if (xPressed && !previousXDown)
 		{
-			cubeProjectileObject = (GameObject) Instantiate (cubeBomb);
+			cubeProjectileObject = (GameObject) Instantiate (cubePush);
 
 		}
 		// Animate projectile in front of player
