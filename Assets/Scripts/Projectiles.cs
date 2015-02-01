@@ -8,15 +8,19 @@ public class Projectiles : MonoBehaviour {
 	{
 	}
 
-	public GameObject cubeProjectile;
+
 	public GameObject player;
+
+	public GameObject cubeProjectile;
 	public GameObject cubeMagnet;
 	public GameObject cubePush;
+	public GameObject cubeBomb;
 
 	private GameObject cubeProjectileObject;
 	private bool previousBDown = false;
 	private bool previousXDown = false;
 	private bool previousRBDown = false;
+	private bool previousLBDown = false;
 
 
 	// Update is called once per frame
@@ -95,6 +99,30 @@ public class Projectiles : MonoBehaviour {
 		}
 
 		previousRBDown = rbPressed;
+
+		// Attaching the Y button to Magnetic Cube
+		bool lbPressed = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.LeftShoulder);
+		
+		// Create projectile
+		if (lbPressed && !previousLBDown)
+		{
+			cubeMagnet = (GameObject) Instantiate (cubeBomb);
+		}
+		// Animate projectile in front of player
+		else if (lbPressed)
+		{
+			print ("LB being pressed");
+			cubeMagnet.transform.position = player.transform.position + 2 * player.transform.forward;
+			cubeMagnet.transform.Rotate (new Vector3(15, 30, 35) * Time.deltaTime);
+		}
+		// Fire projectile
+		else if (!lbPressed && previousLBDown)
+		{
+			print ("LB released");
+			cubeMagnet.rigidbody.velocity += 1 * player.transform.forward;
+		}
+		
+		previousLBDown = lbPressed;
 
 	}
 
