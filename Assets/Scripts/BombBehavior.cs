@@ -7,6 +7,7 @@ public class BombBehavior : MonoBehaviour {
 	public float radius;
 	public GameObject player;
 	public GameObject explosion;
+	public int fuse;
 	
 	private bool expired = false;
 	
@@ -37,8 +38,8 @@ public class BombBehavior : MonoBehaviour {
 	}
 	
 	IEnumerator Timer() {
-		for (int i = 0; i < 300; i++){
-			if (i == 299){
+		for (int i = 0; i < fuse; i++){
+			if (i == fuse-1){
 				expired = true;
 			}
 			yield return null;
