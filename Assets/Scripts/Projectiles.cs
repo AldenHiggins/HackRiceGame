@@ -3,9 +3,11 @@ using System.Collections;
 
 public class Projectiles : MonoBehaviour {
 
+	private GameLogic game;
 	// Use this for initialization
 	void Start () 
 	{
+		game = (GameLogic) transform.gameObject.GetComponent (typeof(GameLogic));
 	}
 
 
@@ -55,8 +57,15 @@ public class Projectiles : MonoBehaviour {
 		// Create projectile
 		if (xPressed && !previousXDown)
 		{
-			cubeProjectileObject = (GameObject) Instantiate (cubePush);
-
+			if (game.getPushBlocksLeft() > 0)
+			{
+				game.placePushBlock();
+				cubeProjectileObject = (GameObject) Instantiate (cubePush);
+			}
+			else
+			{
+				xPressed = false;
+			}
 		}
 		// Animate projectile in front of player
 		else if (xPressed)
@@ -84,7 +93,17 @@ public class Projectiles : MonoBehaviour {
 		// Create projectile
 		if (rbPressed && !previousRBDown)
 		{
-			cubeMagnet = (GameObject) Instantiate (cubeMagnet);
+			if (game.getPullBlocksLeft() > 0)
+			{
+				game.placePullBlock();
+//				cubeProjectileObject = (GameObject) Instantiate (cubePush);
+				cubeMagnet = (GameObject) Instantiate (cubeMagnet);
+			}
+			else
+			{
+				rbPressed = false;
+			}
+
 		}
 		// Animate projectile in front of player
 		else if (rbPressed)
