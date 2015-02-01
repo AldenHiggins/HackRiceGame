@@ -62,14 +62,16 @@ public class Projectiles : MonoBehaviour {
 		else if (xPressed)
 		{
 			print ("X being pressed");
-			cubeProjectileObject.transform.position = player.transform.position + 2 * player.transform.forward;
+			cubeProjectileObject.transform.position = player.transform.position + player.transform.forward;
 			cubeProjectileObject.transform.Rotate (new Vector3(15, 30, 35) * Time.deltaTime);
+			cubeProjectileObject.rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+			cubeProjectileObject.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 		}
 		// Fire projectile
 		else if (!xPressed && previousXDown)
 		{
 			print ("X released");
-			cubeProjectileObject.rigidbody.velocity += 8 * player.transform.forward;
+			//cubeProjectileObject.rigidbody.velocity += 8 * player.transform.forward;
 			player.audio.Play();
 		}
 		
@@ -88,14 +90,17 @@ public class Projectiles : MonoBehaviour {
 		else if (rbPressed)
 		{
 			print ("RB being pressed");
-			cubeMagnet.transform.position = player.transform.position + 2 * player.transform.forward;
+			cubeMagnet.transform.position = player.transform.position + player.transform.forward;
 			cubeMagnet.transform.Rotate (new Vector3(15, 30, 35) * Time.deltaTime);
+			cubeMagnet.rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+			cubeMagnet.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 		}
+
 		// Fire projectile
 		else if (!rbPressed && previousRBDown)
 		{
 			print ("RB released");
-			cubeMagnet.rigidbody.velocity += 1 * player.transform.forward;
+			//cubeMagnet.rigidbody.velocity += 1 * player.transform.forward;
 		}
 
 		previousRBDown = rbPressed;
