@@ -7,45 +7,33 @@ public class MagneticCube : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		Collider[] colliders;
-//		Rigidbody rigidbody;
-//
-//		print ("Made a magnetic cube.");
-//		colliders = Physics.OverlapSphere (transform.position , 120f);
-//		foreach (Collider collider in colliders)
-//		{
-//			print ("Found a collider");
-//			rigidbody = (Rigidbody) collider.gameObject.GetComponent (typeof (Rigidbody));
-//			if (rigidbody == null)
-//			{
-//				continue;
-//			}
-//			print ("Found a rigidbody");
-//			rigidbody.AddExplosionForce (5f * -1, transform.position, 20f);
-//
-//		}
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Destroy(GameObject, 3);
 		Collider[] colliders;
 		Rigidbody rigidbody;
 
-		print ("Made a magnetic cube.");
-		colliders = Physics.OverlapSphere (transform.position , 120f);
+		//print ("Made a magnetic cube.");
+		colliders = Physics.OverlapSphere (transform.position , 20f);
 		foreach (Collider collider in colliders)
 		{
-			print ("Found a collider");
-			rigidbody = (Rigidbody) collider.gameObject.GetComponent (typeof (Rigidbody));
-			if (rigidbody == null)
-			{
-				continue;
-			}
-			print ("Found a rigidbody");
-			rigidbody.AddExplosionForce (100f * -1, transform.position, 20f);
+			//print ("GameObject is  " + collider.gameObject.name);
+			if (collider.gameObject.name == "CubeBullet(Clone)") {
+				float distance = Vector3.Distance (collider.gameObject.transform.position, transform.position);
+				if (distance > 2f) {
 
+
+					rigidbody = (Rigidbody)collider.gameObject.GetComponent (typeof(Rigidbody));
+					if (rigidbody == null) {
+						continue;
+					}
+					//print ("Found a rigidbody");
+					rigidbody.AddExplosionForce (100f * -1, transform.position, 20f);
+				}
+			}
 		}
+
 	}
 }
