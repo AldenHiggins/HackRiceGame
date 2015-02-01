@@ -27,9 +27,10 @@ public class Projectiles : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if((game.canFireCircle != null) && (Vector3.Distance(game.canFireCircle.transform.position , transform.position) < 8 )){
-			bool bPressed = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.B);
 
+		bool bPressed = OVRGamepadController.GPC_GetButton(OVRGamepadController.Button.B);
+		if((game.canFireCircle != null) && (Vector3.Distance(game.canFireCircle.transform.position , transform.position) < game.canFireCircle.transform.localScale.x )){
+			print ("B pressed");
 			// Create projectile
 			if (bPressed && !previousBDown)
 			{
