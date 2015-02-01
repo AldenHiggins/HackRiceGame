@@ -6,7 +6,6 @@ public class Projectiles : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-	
 	}
 
 	public GameObject cubeProjectile;
@@ -18,6 +17,7 @@ public class Projectiles : MonoBehaviour {
 	private bool previousBDown = false;
 	private bool previousXDown = false;
 	private bool previousRBDown = false;
+
 
 	// Update is called once per frame
 	void Update () {
@@ -40,6 +40,7 @@ public class Projectiles : MonoBehaviour {
 		{
 			print ("B released");
 			cubeProjectileObject.rigidbody.velocity += 8 * player.transform.forward;
+			player.audio.Play();
 		}
 
 		previousBDown = bPressed;
@@ -65,6 +66,7 @@ public class Projectiles : MonoBehaviour {
 		{
 			print ("X released");
 			cubeProjectileObject.rigidbody.velocity += 8 * player.transform.forward;
+			player.audio.Play();
 		}
 		
 		previousXDown = xPressed;
