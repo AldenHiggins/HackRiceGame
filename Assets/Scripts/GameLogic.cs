@@ -4,6 +4,7 @@ using System.Collections;
 
 public class GameLogic : MonoBehaviour 
 {
+	public GameObject canFireCircle;
 	public int startingPull;
 	public int startingPush;
 
