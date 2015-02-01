@@ -74,20 +74,20 @@ public class Projectiles : MonoBehaviour {
 		// Create projectile
 		if (rbPressed && !previousRBDown)
 		{
-			cubeProjectileObject = (GameObject) Instantiate (cubeMagnet);
+			cubeMagnet = (GameObject) Instantiate (cubeMagnet);
 		}
 		// Animate projectile in front of player
 		else if (rbPressed)
 		{
 			print ("RB being pressed");
-			cubeProjectileObject.transform.position = player.transform.position + 3 * player.transform.forward;
-			cubeProjectileObject.transform.Rotate (new Vector3(15, 30, 35) * Time.deltaTime);
+			cubeMagnet.transform.position = player.transform.position + 2 * player.transform.forward;
+			cubeMagnet.transform.Rotate (new Vector3(15, 30, 35) * Time.deltaTime);
 		}
 		// Fire projectile
 		else if (!rbPressed && previousRBDown)
 		{
 			print ("RB released");
-			cubeProjectileObject.rigidbody.velocity += 8 * player.transform.forward;
+			cubeMagnet.rigidbody.velocity += 1 * player.transform.forward;
 		}
 
 		previousRBDown = rbPressed;
