@@ -11,7 +11,7 @@ public class StartGame : MonoBehaviour {
 
 		if (startPressed)
 		{
-			Application.LoadLevel("AldenRoom");
+			Application.LoadLevel("SeansRoom");
 		}
 	}
 }

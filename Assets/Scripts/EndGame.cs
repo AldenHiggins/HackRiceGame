@@ -6,6 +6,7 @@ public class EndGame : MonoBehaviour
 {
 	public Text uiTextLeft;
 	public Text uiTextRight;
+	public string nextLevelToLoad;
 
 	void OnTriggerEnter(Collider other) 
 	{
@@ -14,6 +15,11 @@ public class EndGame : MonoBehaviour
 			print ("Game over bro");
 			uiTextLeft.text = "YOU WIN!!!!!";
 			uiTextRight.text = "YOU WIN!!!!";
+			if (nextLevelToLoad != null)
+			{
+				Application.LoadLevel(nextLevelToLoad);
+			}
+			
 		}
 	}
 }
